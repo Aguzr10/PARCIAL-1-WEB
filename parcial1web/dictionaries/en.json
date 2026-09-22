@@ -1,0 +1,49 @@
+{
+  "welcome": "Welcome",
+  "profile": "Profile",
+  "home": "Home",
+  "title": "Internationalization System (I18N)",
+  "subtitle": "Web Development Pre-exam",
+  "description": "This application implements dynamic routing by language prefix, automatic detection via Proxy, and preference persistence.",
+  "selectLanguage": "Select language:",
+  "currentLanguageLabel": "Active language:",
+  "currentLanguageName": "English",
+  "featuresTitle": "Implemented Features",
+  "features": {
+    "routing": "Dynamic routing by prefix (/es, /en)",
+    "proxy": "Automatic detection and redirection using Next.js 16 Proxy",
+    "dictionaries": "Asynchronous dictionary loading in Server Components",
+    "persistence": "Language selection persistence using Cookies (NEXT_LOCALE)"
+  },
+  "profileSection": {
+    "title": "Student Profile",
+    "nameLabel": "Name:",
+    "nameValue": "Alejandro Guzmán",
+    "courseLabel": "Course:",
+    "courseValue": "Web Development",
+    "universityLabel": "Program:",
+    "universityValue": "Systems Engineering",
+    "preferenceLabel": "Saved preference:",
+    "statusLabel": "Persistence status:",
+    "statusActive": "Active (NEXT_LOCALE Cookie configured)"
+  },
+  "apiSection": {
+    "badge": "Exam Preparation",
+    "title": "API Route (Route Handler)",
+    "description": "Practical example of an API in Next.js to review before the exam. Demonstrates how to handle HTTP methods and return JSON data.",
+    "button": "Test Example API (/api/items)"
+  },
+  "navigation": {
+    "home": "Home",
+    "profile": "Profile",
+    "api": "API Demo"
+  },
+  "actions": {
+    "backHome": "Back to Home",
+    "goToProfile": "View Profile Page",
+    "viewOnGithub": "GitHub Repository"
+  },
+  "footer": {
+    "text": "Web Development Project - I18N Pre-exam with Next.js 16."
+  }
+}

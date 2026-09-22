@@ -1,0 +1,28 @@
+# dependencias
+node_modules/
+preparcial/node_modules/
+.pnp
+.pnp.js
+
+# compilacion
+.next/
+preparcial/.next/
+out/
+build/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# variables de entorno
+.env*
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# archivos locales y enunciados
+*.pdf
+.DS_Store
