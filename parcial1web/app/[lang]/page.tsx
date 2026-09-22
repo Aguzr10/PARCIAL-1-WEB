@@ -1,16 +1,24 @@
-import Link from 'next/link'
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getDictionary, hasLocale } from '@/lib/dictionaries'
+import { getAllBreeds, getRandomDogImage } from '@/lib/breeds'
+import BreedList, { BreedData } from '@/components/BreedList'
+import RandomBreedButton from '@/components/RandomBreedButton'
 
-/**
- * Página principal (Home) renderizada en el servidor (Server Component).
- * 
- * REQUERIMIENTO:
- * - Uso obligatorio de la llave "welcome" del modelo de datos:
- *   es.json -> {"welcome": "Bienvenido"}
- *   en.json -> {"welcome": "Welcome"}
- * - Cero texto hardcodeado.
- */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>
+}): Promise<Metadata> {
+  const { lang } = await params
+  if (!hasLocale(lang)) return {}
+  const dict = await getDictionary(lang)
+  return {
+    title: dict.home.title,
+    description: dict.home.description,
+  }
+}
+
 export default async function HomePage({
   params,
 }: {
@@ -18,78 +26,46 @@ export default async function HomePage({
 }) {
   const { lang } = await params
 
-  // Validación de seguridad de idioma
   if (!hasLocale(lang)) {
     notFound()
   }
 
-  // Carga asíncrona del diccionario en el servidor
   const dict = await getDictionary(lang)
 
+  // 1. Obtener la lista completa de todas las razas
+  const allBreeds = await getAllBreeds()
+
+  // 2. Extraer las primeras 15 razas sin subrazas
+  const first15Breeds = allBreeds.slice(0, 15)
+
+  // 3. Disparar la petición de su imagen aleatoria en paralelo con Promise.all
+  const breedsData: BreedData[] = await Promise.all(
+    first15Breeds.map(async (breed) => {
+      const imageUrl = await getRandomDogImage(breed)
+      return {
+        breed,
+        imageUrl,
+      }
+    })
+  )
+
   return (
-    <>
-      {/* Sección Hero con la llave requerida "welcome" */}
-      <section className="card hero-card">
-        <h1 className="hero-welcome">{dict.welcome}</h1>
-        <h2 className="hero-subtitle">{dict.subtitle}</h2>
-        <p className="hero-description">{dict.description}</p>
-        
-        <div className="actions-row">
-          <Link href={`/${lang}/profile`} className="btn btn-primary">
-            {dict.actions.goToProfile}
-          </Link>
-          <a
-            href="https://github.com/Aguzr10/Preparcial-1-WEB"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-secondary"
-          >
-            {dict.actions.viewOnGithub}
-          </a>
-        </div>
-      </section>
+    <div className="max-w-6xl mx-auto px-4 py-8">
+      {/* Barra superior con Título y Botón Random */}
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">
+          {dict.home.heading}
+        </h1>
+        <RandomBreedButton
+          allBreeds={allBreeds}
+          lang={lang}
+          label={dict.home.randomButton}
+          loadingLabel={dict.home.loadingRandom}
+        />
+      </div>
 
-      {/* Tarjeta de Requerimientos y Características */}
-      <section className="card">
-        <h2 className="hero-subtitle">{dict.featuresTitle}</h2>
-        <div className="features-grid">
-          <div className="feature-item">
-            <span className="feature-icon">1</span>
-            <p className="feature-text">{dict.features.routing}</p>
-          </div>
-          <div className="feature-item">
-            <span className="feature-icon">2</span>
-            <p className="feature-text">{dict.features.proxy}</p>
-          </div>
-          <div className="feature-item">
-            <span className="feature-icon">3</span>
-            <p className="feature-text">{dict.features.dictionaries}</p>
-          </div>
-          <div className="feature-item">
-            <span className="feature-icon">4</span>
-            <p className="feature-text">{dict.features.persistence}</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Sección de preparación para el Parcial (Demostración de API) */}
-      <section className="card">
-        <span className="brand-badge">{dict.apiSection.badge}</span>
-        <h2 className="hero-subtitle" style={{ marginTop: '0.75rem' }}>
-          {dict.apiSection.title}
-        </h2>
-        <p className="hero-description">{dict.apiSection.description}</p>
-        <div className="actions-row">
-          <a
-            href="/api/items"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-secondary"
-          >
-            {dict.apiSection.button}
-          </a>
-        </div>
-      </section>
-    </>
+      {/* Grid de las 15 tarjetas de razas */}
+      <BreedList breeds={breedsData} lang={lang} />
+    </div>
   )
 }
