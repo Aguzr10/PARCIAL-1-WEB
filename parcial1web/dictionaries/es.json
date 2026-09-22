@@ -1,49 +1,23 @@
 {
-  "welcome": "Bienvenido",
-  "profile": "Perfil",
-  "home": "Inicio",
-  "title": "Sistema de Internacionalización (I18N)",
-  "subtitle": "Preparcial de Desarrollo Web",
-  "description": "Esta aplicación implementa enrutamiento dinámico por prefijo de idioma, detección automática mediante Proxy y persistencia de preferencias.",
-  "selectLanguage": "Seleccionar idioma:",
-  "currentLanguageLabel": "Idioma activo:",
-  "currentLanguageName": "Español",
-  "featuresTitle": "Características Implementadas",
-  "features": {
-    "routing": "Enrutamiento dinámico por prefijo (/es, /en)",
-    "proxy": "Detección y redirección automática con Proxy en Next.js 16",
-    "dictionaries": "Carga asíncrona de diccionarios en Server Components",
-    "persistence": "Persistencia de la selección de idioma con Cookies (NEXT_LOCALE)"
+  "appTitle": "Pawsome Advice",
+  "selectLanguage": "Idioma:",
+  "home": {
+    "title": "Listado de razas - PawsomeAdviceApp",
+    "description": "Descubre todas las razas de perro acompañadas de un consejo de vida aleatorio: una colección pensada para alegrar tu día.",
+    "heading": "Listado de razas",
+    "randomButton": "Random",
+    "loading": "Cargando razas...",
+    "loadingRandom": "Generando..."
   },
-  "profileSection": {
-    "title": "Perfil del Estudiante",
-    "nameLabel": "Nombre:",
-    "nameValue": "Alejandro Guzmán",
-    "courseLabel": "Materia:",
-    "courseValue": "Desarrollo Web",
-    "universityLabel": "Programa:",
-    "universityValue": "Ingeniería de Sistemas",
-    "preferenceLabel": "Preferencia guardada:",
-    "statusLabel": "Estado de persistencia:",
-    "statusActive": "Activa (Cookie NEXT_LOCALE configurada)"
-  },
-  "apiSection": {
-    "badge": "Preparación para el Parcial",
-    "title": "Ruta de API (Route Handler)",
-    "description": "Ejemplo práctico de una API en Next.js para repasar antes del parcial. Muestra cómo manejar métodos HTTP y responder con datos JSON.",
-    "button": "Probar API de Ejemplo (/api/items)"
-  },
-  "navigation": {
-    "home": "Inicio",
-    "profile": "Perfil",
-    "api": "API Demo"
-  },
-  "actions": {
-    "backHome": "Volver al Inicio",
-    "goToProfile": "Ver Página de Perfil",
-    "viewOnGithub": "Repositorio GitHub"
+  "detail": {
+    "titlePrefix": "Detalle de ",
+    "titleSuffix": " - PawsomeAdviceApp",
+    "description": "Consulta una nueva foto de esta raza junto con un consejo de vida aleatorio, y genera otra combinación cuando quieras.",
+    "randomButton": "Random",
+    "loading": "Cargando nuevo consejo e imagen..."
   },
   "footer": {
-    "text": "Proyecto de Desarrollo Web - Preparcial I18N con Next.js 16."
+    "copyright": "© 2026 Pawsome Advice. Todos los derechos reservados.",
+    "credits": "Las imágenes son proporcionadas por Dog CEO API y los consejos por Advice Slip API."
   }
 }
