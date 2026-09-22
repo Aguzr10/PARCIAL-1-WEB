@@ -4,6 +4,8 @@ import { getDictionary, hasLocale } from '@/lib/dictionaries'
 import { getRandomDogImage, getRandomAdvice } from '@/lib/breeds'
 import BreedDetail from '@/components/BreedDetail'
 
+export const dynamic = 'force-dynamic'
+
 interface DetailPageProps {
   params: Promise<{ lang: string; breed: string }>
   searchParams: Promise<{ img?: string; advice?: string; id?: string }>

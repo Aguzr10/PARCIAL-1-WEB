@@ -5,6 +5,8 @@ import { getAllBreeds, getRandomDogImage } from '@/lib/breeds'
 import BreedList, { BreedData } from '@/components/BreedList'
 import RandomBreedButton from '@/components/RandomBreedButton'
 
+export const dynamic = 'force-dynamic'
+
 export async function generateMetadata({
   params,
 }: {
