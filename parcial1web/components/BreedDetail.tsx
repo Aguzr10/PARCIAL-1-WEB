@@ -27,13 +27,10 @@ export function BreedDetail({
   const [loading, setLoading] = useState(false)
 
   const displayName = breed.charAt(0).toUpperCase() + breed.slice(1)
-
-  // Color de fondo correspondiente a la categoría del consejo: (id del consejo) % 5
   const categoryIndex = Math.abs(adviceId) % 5
   const bgCategoryClass = BgColorCategory[categoryIndex] || 'bg-[#BFDBFE]'
   const borderCategoryClass = BorderColorCategory[categoryIndex] || 'border-[#93C5FD]'
 
-  // Botón Random del Detalle: refetch a nivel de cliente sin recargar la página ni crear link
   const handleRefetch = async () => {
     if (loading) return
     setLoading(true)
@@ -56,7 +53,7 @@ export function BreedDetail({
         setAdviceId(adviceData.slip.id)
       }
     } catch (error) {
-      console.error('Error refetching image and advice in detail:', error)
+      console.error(error)
     } finally {
       setLoading(false)
     }
@@ -64,16 +61,13 @@ export function BreedDetail({
 
   return (
     <div className="w-full flex justify-center items-center py-6 px-4">
-      {/* Tarjeta con fondo dinámico asignado por categoría (id del consejo % 5) */}
       <div
         className={`${bgCategoryClass} ${borderCategoryClass} border w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-sm transition-colors duration-300 flex flex-col items-center text-center`}
       >
-        {/* Nombre de la raza */}
         <h1 className="text-xl sm:text-2xl font-medium text-slate-800 mb-4 tracking-wide capitalize">
           {displayName}
         </h1>
 
-        {/* Imagen del perro con componente <Image> de Next.js */}
         <div className="relative w-full max-w-[420px] h-64 sm:h-72 rounded-2xl overflow-hidden bg-black/10 shadow-inner mb-4 flex items-center justify-center">
           {imageUrl ? (
             <Image
@@ -89,12 +83,10 @@ export function BreedDetail({
           )}
         </div>
 
-        {/* Texto del consejo (advice) entre comillas */}
         <p className="text-slate-800 text-sm sm:text-base font-normal mb-5 px-3 min-h-[44px] flex items-center justify-center italic">
           &ldquo;{advice}&rdquo;
         </p>
 
-        {/* Botón Random con lógica de refetch a nivel de cliente */}
         <button
           type="button"
           onClick={handleRefetch}

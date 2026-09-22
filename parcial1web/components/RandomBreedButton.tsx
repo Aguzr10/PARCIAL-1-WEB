@@ -24,13 +24,11 @@ export function RandomBreedButton({
     setLoading(true)
 
     try {
-      // 1. Elegir una raza aleatoria de la lista completa de razas
       const availableBreeds = allBreeds.length > 0
         ? allBreeds
         : ['akita', 'beagle', 'boxer', 'chihuahua', 'husky', 'poodle', 'pug', 'samoyed']
       const randomBreed = availableBreeds[Math.floor(Math.random() * availableBreeds.length)]
 
-      // 2 y 3. En paralelo, obtener imagen aleatoria y consejo aleatorio
       const [imgRes, adviceRes] = await Promise.all([
         fetch(`https://dog.ceo/api/breed/${randomBreed.toLowerCase()}/images/random`),
         fetch(`https://api.adviceslip.com/advice?t=${Date.now()}`),
@@ -43,7 +41,6 @@ export function RandomBreedButton({
       const advice = adviceData.slip?.advice || 'Be kind to every dog you meet.'
       const adviceId = adviceData.slip?.id || 0
 
-      // 4. Navegar a la página de Detalle pasando imagen, consejo e ID para no tener que volver a pedirlos
       const query = new URLSearchParams({
         img: imageUrl,
         advice: advice,
@@ -52,7 +49,7 @@ export function RandomBreedButton({
 
       router.push(`/${lang}/${randomBreed.toLowerCase()}?${query.toString()}`)
     } catch (error) {
-      console.error('Error generating random breed and advice:', error)
+      console.error(error)
       setLoading(false)
     }
   }

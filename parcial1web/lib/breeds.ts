@@ -1,4 +1,3 @@
-// Colores del Background por raza (Tailwind)
 export const BgColorBreed: Record<string, string> = {
   affenpinscher: 'bg-[#FDE68A]',
   african: 'bg-[#BFDBFE]',
@@ -110,7 +109,6 @@ export const BgColorBreed: Record<string, string> = {
   wolfhound: 'bg-[#C7F9CC]',
 }
 
-// Colores del Background para Tailwind segun categoria de consejo
 export const BgColorCategory: Record<number, string> = {
   0: 'bg-[#FDE68A]',
   1: 'bg-[#BFDBFE]',
@@ -128,9 +126,8 @@ export const BorderColorCategory: Record<number, string> = {
 }
 
 export interface BreedItem {
-  name: string
+  breed: string
   imageUrl: string
-  bgColorClass: string
 }
 
 export interface AdviceData {
@@ -138,9 +135,6 @@ export interface AdviceData {
   advice: string
 }
 
-/**
- * Obtiene la lista completa de todas las razas de perro (sin subrazas)
- */
 export async function getAllBreeds(): Promise<string[]> {
   try {
     const res = await fetch('https://dog.ceo/api/breeds/list/all', {
@@ -151,14 +145,11 @@ export async function getAllBreeds(): Promise<string[]> {
       return Object.keys(data.message)
     }
   } catch (error) {
-    console.error('Error fetching breeds list:', error)
+    console.error(error)
   }
   return []
 }
 
-/**
- * Obtiene una imagen aleatoria para una raza dada
- */
 export async function getRandomDogImage(breed: string): Promise<string> {
   try {
     const res = await fetch(`https://dog.ceo/api/breed/${breed.toLowerCase()}/images/random`, {
@@ -169,17 +160,13 @@ export async function getRandomDogImage(breed: string): Promise<string> {
       return data.message
     }
   } catch (error) {
-    console.error(`Error fetching image for breed ${breed}:`, error)
+    console.error(error)
   }
   return '/pawsome-advice-logo.png'
 }
 
-/**
- * Obtiene un consejo aleatorio de Advice Slip API
- */
 export async function getRandomAdvice(): Promise<AdviceData> {
   try {
-    // Advice Slip API requiere cache busting o no-store
     const res = await fetch(`https://api.adviceslip.com/advice?t=${Date.now()}`, {
       cache: 'no-store',
     })
@@ -191,7 +178,7 @@ export async function getRandomAdvice(): Promise<AdviceData> {
       }
     }
   } catch (error) {
-    console.error('Error fetching advice slip:', error)
+    console.error(error)
   }
   return {
     id: 0,

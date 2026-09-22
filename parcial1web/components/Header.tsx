@@ -11,10 +11,7 @@ export function Header({ lang = 'es', selectLanguageLabel = 'Idioma:' }: HeaderP
   return (
     <header className="w-full bg-[#FF6B35] shadow-sm relative">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-        
         <div className="w-24 hidden sm:block" />
-
-        
         <div className="flex-1 flex justify-center">
           <Link
             href={`/${lang}`}
@@ -31,8 +28,6 @@ export function Header({ lang = 'es', selectLanguageLabel = 'Idioma:' }: HeaderP
             />
           </Link>
         </div>
-
-        {/* Selector de idioma */}
         <div className="flex justify-end">
           <LanguageSwitcher currentLang={lang} label={selectLanguageLabel} />
         </div>

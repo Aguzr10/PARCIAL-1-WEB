@@ -31,14 +31,9 @@ export default async function HomePage({
   }
 
   const dict = await getDictionary(lang)
-
-  // 1. Obtener la lista completa de todas las razas
   const allBreeds = await getAllBreeds()
-
-  // 2. Extraer las primeras 15 razas sin subrazas
   const first15Breeds = allBreeds.slice(0, 15)
 
-  // 3. Disparar la petición de su imagen aleatoria en paralelo con Promise.all
   const breedsData: BreedData[] = await Promise.all(
     first15Breeds.map(async (breed) => {
       const imageUrl = await getRandomDogImage(breed)
@@ -51,7 +46,6 @@ export default async function HomePage({
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      {/* Barra superior con Título y Botón Random */}
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">
           {dict.home.heading}
@@ -64,7 +58,6 @@ export default async function HomePage({
         />
       </div>
 
-      {/* Grid de las 15 tarjetas de razas */}
       <BreedList breeds={breedsData} lang={lang} />
     </div>
   )

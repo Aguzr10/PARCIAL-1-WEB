@@ -9,9 +9,7 @@ interface BreedCardProps {
 }
 
 export function BreedCard({ breed, imageUrl, lang }: BreedCardProps) {
-  // Normalizar nombre de la raza en mayúscula inicial
   const displayName = breed.charAt(0).toUpperCase() + breed.slice(1)
-  // Obtener color de fondo de la tabla especificada en el parcial
   const bgClass = BgColorBreed[breed.toLowerCase()] || 'bg-amber-100'
 
   return (
